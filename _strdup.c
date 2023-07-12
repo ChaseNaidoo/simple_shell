@@ -25,7 +25,7 @@ char *_strdup(const char *str)
 
 	if (s == NULL)
 	{
-	return (NULL):
+	return (NULL);
 	}
 
 	p = s;
