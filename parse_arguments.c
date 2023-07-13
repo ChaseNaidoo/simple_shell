@@ -1,7 +1,6 @@
 #include "main.h"
 
 /**
-<<<<<<< HEAD
  * parse_arguments - tokenises input string and stores arguments in array
  *
  * @input: input string

@@ -5,7 +5,7 @@
 #define PATH_DELIMITER ":"
 #define MAX_ARGS 1024
 #define MAX_PATH_LENGTH 3072
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 4096
 #define MAX_FILES 100
 
 extern char **environ;
@@ -45,5 +45,6 @@ void list_files(void);
 char *_memset(char *s, char b, unsigned int n);
 char *find_command_path(char *path_env, char *command);
 void _cd(const char *directory);
+int _atoi(char *s);
 
 #endif
