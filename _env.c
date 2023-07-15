@@ -8,17 +8,33 @@
  */
 void _env(void)
 {
-        int i = 0;
+    int i = 0;
+    int num_env = 0;
 
-        while (environ[i] != NULL)
-        {
-                size_t len = 0;
+    while (environ[num_env] != NULL)
+    {
+        num_env++;
+    }
 
-                while (environ[i][len] != '\0')
-                len++;
+    char *env_vars[num_env];
 
-                write(STDOUT_FILENO, environ[i], len);
-                write(STDOUT_FILENO, "\n", 1);
-                i++;
-        }
+    i = 0;
+    while (environ[i] != NULL)
+    {
+        env_vars[i] = environ[i];
+        i++;
+    }
+
+    i = num_env - 1;
+    while (i >= 0)
+    {
+        size_t len = 0;
+
+        while (env_vars[i][len] != '\0')
+            len++;
+
+        write(STDOUT_FILENO, env_vars[i], len);
+        write(STDOUT_FILENO, "\n", 1);
+        i--;
+    }
 }
