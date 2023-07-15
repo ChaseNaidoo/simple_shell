@@ -4,37 +4,39 @@
  * _env - prints the current environment
  *
  * Return: (no return)
- *
  */
 void _env(void)
 {
-    int i = 0;
-    int num_env = 0;
-
-    while (environ[num_env] != NULL)
+  int num_env = 0;
+  int i;
+  char **env_vars;
+  
+  while (environ[num_env] != NULL)
     {
-        num_env++;
+      num_env++;
     }
 
-    char *env_vars[num_env];
-
-    i = 0;
-    while (environ[i] != NULL)
+  env_vars = malloc(num_env * sizeof(char *));
+  if (env_vars == NULL)
     {
-        env_vars[i] = environ[i];
-        i++;
+      perror("Memory allocation failed.\n");
+      return;
     }
 
-    i = num_env - 1;
-    while (i >= 0)
+  for (i = 0; i < num_env; i++)
     {
-        size_t len = 0;
-
-        while (env_vars[i][len] != '\0')
-            len++;
-
-        write(STDOUT_FILENO, env_vars[i], len);
-        write(STDOUT_FILENO, "\n", 1);
-        i--;
+      env_vars[i] = environ[i];
     }
+
+  for (i = num_env - 1; i >= 0; i--)
+    {
+      size_t len = 0;
+      while (env_vars[i][len] != '\0')
+	len++;
+
+      write(STDOUT_FILENO, env_vars[i], len);
+      write(STDOUT_FILENO, "\n", 1);
+    }
+
+  free(env_vars);
 }
