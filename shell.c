@@ -110,6 +110,21 @@ int main(int argc, char *argv[])
 		  _cd(directory);
 		  continue;
 		}
+	      else if (_strcmp(args[0], "./hbtn_ls") == 0)
+		{
+		  char *hbtn_ls_path = find_command_path("hbtn_ls");
+
+		  if (hbtn_ls_path == NULL)
+		    {
+		      write(STDERR_FILENO, "hbtn_ls: command not found\n", 27);
+		      continue;
+		    }
+
+		  execute_command(args);
+
+		  free(hbtn_ls_path);
+		  continue;
+		}
 
 	      execute_command(args);
 	    }

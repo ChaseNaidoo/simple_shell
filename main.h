@@ -43,7 +43,7 @@ void _env(void);
 char *get_path_env(void);
 void list_files(void);
 char *_memset(char *s, char b, unsigned int n);
-char *find_command_path(char *path_env, char *command);
+char *find_command_path(const char *command);
 void _cd(const char *directory);
 int _atoi(char *s);
 

@@ -20,8 +20,23 @@ void execute_command(char **argv)
     {
       return;
     }
-  if (argv[0][0] == '/')
-    command_path = argv[0];
+
+  if (_strcmp(argv[0], "hbtn_ls") == 0)
+    {
+      command_path = find_command_path("hbtn_ls");
+
+      if (command_path == NULL)
+	{
+	  write(STDERR_FILENO, "hbtn_ls: command not found\n", 27);
+	  return;
+	}
+
+      should_free_command_path = 1;
+    }
+  else if (argv[0][0] == '/')
+    {
+      command_path = argv[0];
+    }
   else
     {
       path_env_ptr = get_path_env();
@@ -30,7 +45,7 @@ void execute_command(char **argv)
 	  perror("PATH environment variable not set.\n");
 	  return;
 	}
-      command_path = find_command_path(path_env_ptr, argv[0]);
+      command_path = find_command_path(argv[0]);
 
       free(path_env_ptr);
 
@@ -51,6 +66,7 @@ void execute_command(char **argv)
 	}
       should_free_command_path = 1;
     }
+
   child_pid = fork();
 
   if (child_pid == -1)
