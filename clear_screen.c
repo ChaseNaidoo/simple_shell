@@ -8,7 +8,7 @@
  */
 void clear_screen(void)
 {
-	char *term_value = _getenv("TERM")
+  char *term_value = _getenv("TERM");
 	const char *clear_sequence;
 
 	if (term_value == NULL)
