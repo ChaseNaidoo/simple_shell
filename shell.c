@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 	if (interactive_mode)
 		{
 		write(STDOUT_FILENO, "($) ", 4);
-		fflush(stdout);
+		fflush(stderr);
 		}
 		if (input_file != -1)
 			{
