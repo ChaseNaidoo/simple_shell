@@ -46,5 +46,6 @@ char *_memset(char *s, char b, unsigned int n);
 char *find_command_path(const char *command);
 void _cd(const char *directory);
 int _atoi(char *s);
+int _startswith(const char *str, const char *prefix);
 
 #endif

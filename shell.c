@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 	size_t input_size = 0;
 	char *directory;
 	int exit_status = 0;
+	int status;
 
 	if (argc > 1)
 	{
@@ -72,8 +73,18 @@ int main(int argc, char *argv[])
 		{
 			if (_strcmp(args[0], "exit") == 0)
 			{
-			exit_status = 0;
-			break;
+			      if (args[1] != NULL)
+				{
+				status = _atoi(args[1]);
+
+			      exit_status = status;
+			      break;
+				}
+			  else
+			    {
+			      exit_status = 0;
+			      break;
+			    }
 			}
 			else if (_strncmp(args[0], "exit ", 5) == 0)
 			{
