@@ -76,8 +76,17 @@ int main(int argc, char *argv[])
 			      if (args[1] != NULL)
 				{
 				status = _atoi(args[1]);
-
+				if (status == -1)
+				  {
+				    write(STDERR_FILENO, "./hsh: 1: exit: Illegal number: ", _strlen("./hsh: 1: exit: Illegal number: "));
+				    write(STDERR_FILENO, args[1], _strlen(args[1]));
+				    write(STDERR_FILENO, "\n", 1);
+				    exit_status = 2;
+				  }
+				else
+				  {
 			      exit_status = status;
+				  }
 			      break;
 				}
 			  else
