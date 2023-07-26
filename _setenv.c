@@ -11,32 +11,31 @@
  */
 int _setenv(const char *name, const char *value, int overwrite)
 {
-  int result;
-  char *env_val;
-  
-  if (name == NULL || value == NULL || name[0] == '\0' || value[0] == '\0')
-    {
-      write(STDERR_FILENO, "setenv: Invalid command syntax\n", 31);
-      return (-1);
-    }
+	int result;
+	char *env_val;
 
-  if (overwrite == 0)
-    {
-      env_val = _getenv(name);
-      if (env_val != NULL)
+	if (name == NULL || value == NULL || name[0] == '\0' || value[0] == '\0')
 	{
-	  write(STDERR_FILENO, "setenv: Variable already exists. Use setenv with overwrite=1 to modify.\n", 73);
-	  return (-1);
+	write(STDERR_FILENO, "setenv: Invalid command syntax\n", 31);
+	return (-1);
 	}
-    }
 
-  result = setenv(name, value, overwrite);
+	if (overwrite == 0)
+	{
+	env_val = _getenv(name);
 
-  if (result != 0)
-    {
-      write(STDERR_FILENO, "setenv: Failed to set environment variable\n", 43);
-      return (-1);
-    }
+	if (env_val != NULL)
+		{
+		write(STDERR_FILENO, "setenv: Variable already exists. Use setenv with overwrite=1 to modify.\n", 73);
+		return (-1);
+		}
+	}
+	result = setenv(name, value, overwrite);
 
-  return (0);
+	if (result != 0)
+	{
+	write(STDERR_FILENO, "setenv: Failed to set environment variable\n", 43);
+	return (-1);
+	}
+	return (0);
 }
